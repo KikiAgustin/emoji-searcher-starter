@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+import Navbar from './components/Navbar'
+import Container from './components/Container'
+
 function App() {
   const [emojisData, setEmojisData] = useState([])
   const [loading, setLoading] = useState(false)
@@ -9,10 +12,13 @@ function App() {
   useEffect(() => {
     async function fetchEmojis() {
       setLoading(true)
+
       try {
         const res = await axios.get('https://run.mocky.io/v3/fe964130-70d0-430f-b839-e55081423c28')
-        setEmojisData(res)
+
+        setEmojisData(res.data)
         setLoading(false)
+
       } catch (error) {
         console.error(error)
         setError(true)
@@ -22,14 +28,19 @@ function App() {
     fetchEmojis()
   }, [])
 
-  console.log('loading ?', loading)
-  console.log('error ?', error)
-  console.log('emojisData ?', emojisData)
-
+  console.log(emojisData)
   return (
-    <div>
-      <h1>Hello, world!</h1>
-    </div>
+    <>
+      <Navbar />
+
+      <Container>
+        <h1>Hello, world!</h1>
+        {loading && <p>Loading...</p>}
+        {error && <p>Ooopps...</p>}
+        {emojisData.length > 0 && <p>Data berhasil di render</p>}
+      </Container>
+
+    </>
   );
 }
 
