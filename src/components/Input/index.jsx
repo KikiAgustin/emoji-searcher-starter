@@ -1,16 +1,14 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'react'
 import style from './Input.module.css'
 
 const Input = ({ onChange, value }) => {
     return (
-
-        <Input
+        <input
             className={style.input}
             onChange={onChange}
             placeholder="Search"
             value={value}
         />
-
     )
 }
 

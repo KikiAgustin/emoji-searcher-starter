@@ -36,11 +36,9 @@ function App() {
     setSearchText(event.target.value)
   }
 
-  console.log(emojisData)
   return (
     <>
       <Navbar />
-
       <Container>
         <Input
           onChange={handleSearchEmojis}
@@ -48,7 +46,7 @@ function App() {
         />
         {loading && <Empty text='Loading...' />}
         {error && <Empty text='Error..' />}
-        {emojisData.length > 0 && <Emojis emojisData={emojisData} />}
+        {emojisData.length > 0 && <Emojis emojisData={emojisData} searchText={searchText} />}
       </Container>
 
     </>
